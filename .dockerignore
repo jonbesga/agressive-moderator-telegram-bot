@@ -1,0 +1,11 @@
+.*
+**/*.pyc
+*.sqlite3
+
+k8s/
+*.sh
+docker-compose.yaml
+Dockerfile
+Makefile
+*.lock
+*.toml

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agressive-moderator
+  namespace: miscellanea
+  labels:
+    app: agressive-moderator
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: agressive-moderator
+  revisionHistoryLimit: 0
+  template:
+    metadata:
+      labels:
+        app: agressive-moderator
+    spec:
+      terminationGracePeriodSeconds: 5
+      imagePullSecrets:
+        - name: regcred
+      containers:
+      - name: bot
+        image: pdr.jonbesga.com/aggresive-moderator-bot:0.1.0
+        imagePullPolicy: Always
+        env:
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: credentials
+              key: OPENAI_API_KEY
+        - name: TELEGRAM_BOT_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: credentials
+              key: TELEGRAM_BOT_TOKEN
