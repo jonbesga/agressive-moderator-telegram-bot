@@ -62,7 +62,7 @@ async def handle_reply_to_channel_message(update: Update, context: ContextTypes.
     if not original_message:
         return
 
-    if original_message.sender_chat.id not in [-1002058119580]:
+    if original_message.sender_chat.id not in [-1002058119580, -1001371888016]:
         return
 
     answer = await get_criteria(original_message.text, reply.text)
